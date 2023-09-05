@@ -45,8 +45,7 @@ pipeline {
                 script {
                     try {
                         if (fileExists('simple-springboot-app/pom.xml')) {
-                            sh 'cd simple-springboot-app'
-                            sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Java-spring-boot'
+                            sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Java-spring-boot -f simple-springboot-app/pom.xml'
                         } else if (fileExists('package.json')) {
                             sh 'npm install'
                             sh 'sonar-scanner' // Run SonarCloud analysis for Node.js application
