@@ -73,8 +73,10 @@ pipeline {
             steps {
                 script {
                     try {
-                        withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-                            sh 'mvn snyk:test -fn'
+                        snykSecurity(
+                            snykInstallation: 'Snyk',
+                            snykTokenId: 'SNYK_TOKEN',
+                        )
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
