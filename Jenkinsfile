@@ -17,6 +17,9 @@ pipeline {
         // nodejs 'NodeJS_14'
         // Add More tools as needed
     }
+    environment {
+        SNYK_HOME = tool name: 'Snyk'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -74,7 +77,7 @@ pipeline {
                 script {
                     try {
                         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-                            sh 'snyk test --all-projects'
+                            sh '${SNYK_HOME}/snyk-linux code test --all-projects'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
