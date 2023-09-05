@@ -45,6 +45,7 @@ pipeline {
                 script {
                     try {
                         if (fileExists('simple-springboot-app/pom.xml')) {
+                            sh 'cd simple-springboot-app'
                             sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Java-spring-boot'
                         } else if (fileExists('package.json')) {
                             sh 'npm install'
