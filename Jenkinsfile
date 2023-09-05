@@ -48,8 +48,7 @@ pipeline {
                 script {
                     try {
                         if (fileExists('pom.xml')) {
-                            def scannerHome = tool 'SonarQube'
-                            withSonarQubeEnv('SonarQube') {
+                            withSonarQubeEnv(credentialsId: 'SonarQube', installationName: 'SonarQube') {
                                 sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Java-spring-boot -f simple-springboot-app/pom.xml'
                             }
                         } else if (fileExists('package.json')) {
