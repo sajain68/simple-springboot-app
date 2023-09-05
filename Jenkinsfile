@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'Maven'
-        // nodejs 'NodeJS_14'
+        nodejs 'NodeJS'
         // go 'Go_1_17'
         // ruby 'Ruby_3_0'
         // python 'Python_3_9'
