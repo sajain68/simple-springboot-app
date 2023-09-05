@@ -73,7 +73,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        withCredentials([string(credentialsId: 'Snyk', variable: 'Snyk API token')]) {
+                        withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
                             sh 'mvn snyk:test -fn'
                         }
                     } catch (Exception e) {
