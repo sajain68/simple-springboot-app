@@ -2,19 +2,19 @@ pipeline {
     agent any
     tools {
         maven 'Maven_3_5_2'
-        nodejs 'NodeJS_14'
-        go 'Go_1_17'
-        ruby 'Ruby_3_0'
-        python 'Python_3_9'
-        dockerTool 'Docker_20_10_8'
-        kubectl 'kubectl_1_21_4'
-        awsCli 'AWS_Cli_2_2_22'
-        terraform 'Terraform_1_0_9'
-        git 'Git_2_33_0'
-        androidSdk 'Android_SDK'
-        xcode 'Xcode_12'
-        ruby 'Ruby_3_0'
-        nodejs 'NodeJS_14'
+        // nodejs 'NodeJS_14'
+        // go 'Go_1_17'
+        // ruby 'Ruby_3_0'
+        // python 'Python_3_9'
+        // dockerTool 'Docker_20_10_8'
+        // kubectl 'kubectl_1_21_4'
+        // awsCli 'AWS_Cli_2_2_22'
+        // terraform 'Terraform_1_0_9'
+        // git 'Git_2_33_0'
+        // androidSdk 'Android_SDK'
+        // xcode 'Xcode_12'
+        // ruby 'Ruby_3_0'
+        // nodejs 'NodeJS_14'
         // Add More tools as needed
     }
     stages {
