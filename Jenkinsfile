@@ -73,16 +73,15 @@ pipeline {
             steps {
                 script {
                     try {
-                        snykSecurity(
-                            snykInstallation: 'Snyk',
-                            snykTokenId: 'SNYK_TOKEN',
-                        )
+                        withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+                            sh 'mvn snyk:test -fn'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Error during Snyk analysis: ${e.message}")
                     }
                 }
+            }
         }
         stage('Java Spring Boot Build and Test') {
             steps {
