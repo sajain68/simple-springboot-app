@@ -88,8 +88,8 @@ pipeline {
                 script {
                     try {
                         if (fileExists('simple-springboot-app/src/main/resources/application.yml')) {
-                            sh 'mvn clean package'
-                            sh 'mvn test'
+                            sh 'mvn clean package -f simple-springboot-app/pom.xml'
+                            sh 'mvn test -f simple-springboot-app/pom.xml'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
