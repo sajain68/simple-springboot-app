@@ -78,7 +78,7 @@ pipeline {
                     try {
                         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
                             sh 'npm install -g snyk'
-                            sh 'snyk code test --all-projects'
+                            sh 'snyk monitor --all-projects'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
