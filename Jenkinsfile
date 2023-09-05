@@ -83,7 +83,6 @@ pipeline {
                         error("Error during Snyk analysis: ${e.message}")
                     }
                 }
-            }
         }
         stage('Java Spring Boot Build and Test') {
             steps {
