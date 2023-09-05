@@ -28,11 +28,11 @@ pipeline {
                 script {
                     try {
                         // Function to detect Java version
-                        def javaVersion = detectJavaVersion()
+                        // def javaVersion = detectJavaVersion()
 
-                        // Set the Java version for the pipeline
-                        env.JAVA_HOME = javaVersion
-                        tool name: "Java_${javaVersion}", type: 'jdk'
+                        // // Set the Java version for the pipeline
+                        // env.JAVA_HOME = javaVersion
+                        tool name: "Java", type: 'jdk'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Error during Java version detection: ${e.message}")
