@@ -40,41 +40,41 @@ pipeline {
                 }
             }
         }
-        stage('Compile and Run Sonar Analysis') {
-            steps {
-                script {
-                    try {
-                        if (fileExists('simple-springboot-app/pom.xml')) {
-                            sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Java-spring-boot -f simple-springboot-app/pom.xml'
-                        } else if (fileExists('package.json')) {
-                            sh 'npm install'
-                            sh 'sonar-scanner' // Run SonarCloud analysis for Node.js application
-                        } else if (fileExists('go.mod')) {
-                            sh 'go mod download'
-                            sh 'sonar-scanner' // Run SonarCloud analysis for Go application
-                        } else if (fileExists('Gemfile')) {
-                            sh 'bundle install'
-                            sh 'sonar-scanner' // Run SonarCloud analysis for Ruby application
-                        } else if (fileExists('requirements.txt')) {
-                            sh 'pip install -r requirements.txt'
-                            sh 'sonar-scanner' // Run SonarCloud analysis for Python application
-                        } else {
-                            currentBuild.result = 'FAILURE'
-                            error("Unsupported application type: No compatible build steps available.")
-                        }
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        error("Error during Sonar analysis: ${e.message}")
-                    }
-                }
-            }
-        }
+        // stage('Compile and Run Sonar Analysis') {
+        //     steps {
+        //         script {
+        //             try {
+        //                 if (fileExists('simple-springboot-app/pom.xml')) {
+        //                     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Java-spring-boot -f simple-springboot-app/pom.xml'
+        //                 } else if (fileExists('package.json')) {
+        //                     sh 'npm install'
+        //                     sh 'sonar-scanner' // Run SonarCloud analysis for Node.js application
+        //                 } else if (fileExists('go.mod')) {
+        //                     sh 'go mod download'
+        //                     sh 'sonar-scanner' // Run SonarCloud analysis for Go application
+        //                 } else if (fileExists('Gemfile')) {
+        //                     sh 'bundle install'
+        //                     sh 'sonar-scanner' // Run SonarCloud analysis for Ruby application
+        //                 } else if (fileExists('requirements.txt')) {
+        //                     sh 'pip install -r requirements.txt'
+        //                     sh 'sonar-scanner' // Run SonarCloud analysis for Python application
+        //                 } else {
+        //                     currentBuild.result = 'FAILURE'
+        //                     error("Unsupported application type: No compatible build steps available.")
+        //                 }
+        //             } catch (Exception e) {
+        //                 currentBuild.result = 'FAILURE'
+        //                 error("Error during Sonar analysis: ${e.message}")
+        //             }
+        //         }
+        //     }
+        // }
         stage('RunSCAAnalysisUsingSnyk') {
             steps {
                 script {
                     try {
                         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-                            sh 'mvn snyk:test -fn'
+                            sh 'snyk test --all-projects'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
