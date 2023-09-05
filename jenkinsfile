@@ -87,7 +87,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        if (fileExists('src/main/resources/application.properties')) {
+                        if (fileExists('simple-springboot-app/src/main/resources/application.yml')) {
                             sh 'mvn clean package'
                             sh 'mvn test'
                         }
