@@ -77,7 +77,8 @@ pipeline {
                 script {
                     try {
                         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-                            sh '${SNYK_HOME}/snyk-linux code test --all-projects'
+                            sh 'npm install -g snyk'
+                            sh 'snyk code test --all-projects'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
